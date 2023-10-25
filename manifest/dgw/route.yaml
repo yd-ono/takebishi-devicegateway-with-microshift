@@ -5,7 +5,6 @@ metadata:
   labels:
     app: dgw
 spec:
-  host: dgw.rhde.local
   to:
     kind: Service
     name: dgw
