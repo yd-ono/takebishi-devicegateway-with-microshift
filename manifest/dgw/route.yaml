@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dgw
 spec:
-  # host: auto determined - no need to provide host name
+  host: dgw.local
   to:
     kind: Service
     name: dgw
