@@ -268,6 +268,6 @@ Then, in the `Event` setting, insert the tag as a macro and you can visualize th
 
 ![dgw data source](./doc/dgw-datasource.png)
 
-## Demonstration video of PLC data displayed in Grafana
+## Demo video of PLC data visualization
 
-!['demo movie']('https://www.youtube.com/watch?v=N5UEwtG5lck')
+[![demo](http://img.youtube.com/vi/N5UEwtG5lck/0.jpg)](https://www.youtube.com/watch?v=N5UEwtG5lck)
