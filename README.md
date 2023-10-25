@@ -251,7 +251,7 @@ Setting MQTT data source as follows:
 
 Select `Dashboards` from side menu:
 
-![select-dashboard-menu](./doc/select-dashboard.png)
+<img src="./doc/select-dashboard.png" width="70%">
 
 Click `import dashboard` to import `manifest/grafana/demo.json`
 
