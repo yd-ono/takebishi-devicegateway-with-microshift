@@ -143,6 +143,15 @@ service/dgw                   NodePort   10.43.20.141   <none>        80:31777/T
 oc apply -f manifest/grafana
 ```
 
+```bash
+oc get po,svc
+```
+
+```bash
+
+
+```
+
 
 # Configuration of Device Gateway
 All Device Gateway settings are done through the web console. Here, as a simple test, we will add a setting to send Device Gateway status to MQTT broker in 1 second cycles.
