@@ -1,0 +1,6 @@
+apiVersion: v2
+description: Grafana Dashboard
+keywords:
+- grafana
+name: grafana
+version: 0.0.1
