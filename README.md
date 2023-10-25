@@ -237,7 +237,7 @@ password: admin
 
 Select [Connections]-[Data sources] from the side menu:
 
-<img src="./doc/select-datasources.png" width="40%">
+<img src="./doc/select-datasources.png" width="20%">
 
 Click `Add data source` to search for MQTT:
 
