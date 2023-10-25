@@ -270,5 +270,6 @@ Then, in the `Event` setting, insert the tag as a macro and you can visualize th
 
 ## Demo video of PLC data visualization
 
+[![demo](http://img.youtube.com/vi/N5UEwtG5lck/0.jpg)](https://www.youtube.com/embed/N5UEwtG5lck?si=l8Cpnewv1ZfHvkEU)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/N5UEwtG5lck?si=l8Cpnewv1ZfHvkEU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/embed/N5UEwtG5lck?si=l8Cpnewv1ZfHvkEU
