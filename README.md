@@ -231,7 +231,7 @@ username: admin
 password: admin
 ```
 
-<img src="./doc/grafana-top.png" width="70%">
+<img src="./doc/grafana-top.png" width="40%">
 
 ## Data source setting
 
@@ -241,7 +241,7 @@ Select [Connections]-[Data sources] from the side menu:
 
 Click `Add data source` to search for MQTT:
 
-<img src="./doc/select-mqtt-datasource.png" width="40%">
+<img src="./doc/select-mqtt-datasource.png" width="60%">
 
 Setting MQTT data source as follows:
 
