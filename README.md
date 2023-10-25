@@ -237,25 +237,25 @@ password: admin
 
 Select [Connections]-[Data sources] from the side menu:
 
-![select data sources](./doc/select-datasources.png)
+<img src="./doc/select-datasources.png" width="40%">
 
 Click `Add data source` to search for MQTT:
 
-<img src="./doc/select-mqtt-datasource.png" width="70%">
+<img src="./doc/select-mqtt-datasource.png" width="40%">
 
 Setting MQTT data source as follows:
 
-<img src="./doc/setting-mqtt-datasource.png" width="70%">
+<img src="./doc/setting-mqtt-datasource.png" width="40%">
 
 ## Create a dashboard
 
 Select `Dashboards` from side menu:
 
-<img src="./doc/select-dashboard.png" width="70%">
+<img src="./doc/select-dashboard.png" width="40%">
 
 Click `import dashboard` to import `manifest/grafana/demo.json`
 
-![import dashboard](./doc/import-dashboard.png)
+<img src="./doc/import-dashboard.png" width="40%">
 
 
 Data on the MQTT Broker can be displayed as a graph as shown below. In this demo, the number of bytes sent/received by the Device Gateway is simply displayed as a graph. 
