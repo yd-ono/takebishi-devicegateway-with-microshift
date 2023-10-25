@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dgw
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: 80-tcp
       protocol: TCP
@@ -15,5 +15,6 @@ spec:
       protocol: TCP
       port: 443
       targetPort: 443
+      nodePort: 30000
   selector:
     app: dgw

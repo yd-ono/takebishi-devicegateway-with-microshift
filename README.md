@@ -35,12 +35,14 @@ https://access.redhat.com/documentation/ja-jp/red_hat_build_of_microshift/4.13
 
 ```
 git clone https://github.com/yd-ono/takebishi-devicegateway-with-microshift.git
+cd takebishi-devicegateway-with-microshift/
 ```
 
 ## Create a namespace
 
 ```
 oc create -f manifest/namespace.yaml
+oc config set-context $(oc config current-context) --namespace=dgw
 ```
 
 ## Deploy Device Gateway
@@ -57,11 +59,26 @@ oc get po -n dgw
 
 ```
 NAME                   READY   STATUS    RESTARTS   AGE
-dgw-7cc9645bd5-zmpb7   1/1     Running   0          7m52s
+dgw-77c48c78b5-547j7   1/1     Running   0          5m16s
 ```
 
-> Note. Takebishi Device Gateway container images are provided as Red Hat certified container :
+> Note1. Takebishi Device Gateway container images are provided as Red Hat certified container :
 > https://catalog.redhat.com/software/container-stacks/detail/64b78a22c9f380494e648f67
+
+> Note2. If you cannot use TopoLVM, please change `manifest/dgw/deployment.yaml` as follows:
+
+
+```yaml
+39      volumes:
+40    - name: pvc-dxpgateway
+41        hostPath:
+42          path: /dgw/pvc-dxpgateway
+43          type: DirectoryOrCreate
+44      - name: pvc-sdcard
+45        hostPath:
+46          path: /dgw/pvc-sdcard
+47          type: type: DirectoryOrCreate
+```
 
 You can access Device Gateway's web console via Route:
 
