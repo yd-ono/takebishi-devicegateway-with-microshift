@@ -20,11 +20,22 @@ You can consider an edge box solution where PLC data collected by Device Gateway
 
 # Environment
 - HW: Intel NUC NUC12WSHi7
-- OS: Red Hat Enterprise Linux 9.2
+- Red Hat Enterprise Linux 9.2 & Red Hat Build of MicroShift
 
 # Getting Started
 Technical aspects in this demo are very simple.
 In collaboration with Takebishi, you can run Takebishi's solution, Device Gateway, which can easily connect to old PLCs and other equipment, as a container on MicroShift.
+
+## Instalation of MicroShift
+
+Please refer to the following product document:
+https://access.redhat.com/documentation/ja-jp/red_hat_build_of_microshift/4.13
+
+## Clone this repository
+
+```
+git clone https://github.com/yd-ono/takebishi-devicegateway-with-microshift.git
+```
 
 ## Create a namespace
 
