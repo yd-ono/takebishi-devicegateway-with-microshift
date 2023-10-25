@@ -62,6 +62,15 @@ NAME                   READY   STATUS    RESTARTS   AGE
 dgw-77c48c78b5-547j7   1/1     Running   0          5m16s
 ```
 
+```
+oc get svc
+```
+
+```
+NAME   TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+dgw    NodePort   10.43.20.141   <none>        80:31777/TCP,443:30000/TCP   78s
+```
+
 > Note1. Takebishi Device Gateway container images are provided as Red Hat certified container :
 > https://catalog.redhat.com/software/container-stacks/detail/64b78a22c9f380494e648f67
 
@@ -86,8 +95,10 @@ You can access Device Gateway's web console via Route:
 oc get route -n dgw -ojsonpath='{.items[*].status.ingress[*].host}'
 ```
 
+Alternatively, use NodePort to access the following URL:
+
 ```
-dgw-dgw.apps.edge-jp.demo.local
+https://<YOUR_DEVICE_IP>:30000
 ```
 
 ![Device Gateway Console](./images/console.png)  
@@ -99,7 +110,7 @@ username: administrator
 password: admin
 ```
 
-### Deploy Red Hat AMQ
+## Deploy Red Hat AMQ
 
 The data collected by Device gateway can then be linked to IT applications via Red Hat AMQ, or more specifically, ActiveMQ.
 
@@ -116,14 +127,22 @@ oc get po,svc -n dgw
 ```
 
 ```
-NAME              READY   STATUS    RESTARTS   AGE
-pod/broker-ss-0   1/1     Running   0          11m
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/amq-broker-0           1/1     Running   0          33s
+pod/dgw-77c48c78b5-rphh5   1/1     Running   0          4m29s
 
-NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
-service/broker-all-0-svc   ClusterIP   172.30.133.141   <none>        61616/TCP            11m
-service/broker-hdls-svc    ClusterIP   None             <none>        8161/TCP,61616/TCP   19h
-service/broker-ping-svc    ClusterIP   None             <none>        8888/TCP             19h
+NAME                          TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)                          AGE
+service/amq-broker-hdls-svc   NodePort   10.43.58.243   <none>        8161:31160/TCP,61616:32000/TCP   33s
+service/dgw                   NodePort   10.43.20.141   <none>        80:31777/TCP,443:30000/TCP       4m29s
 ```
+
+
+## Deloy Grafana
+
+```bash
+oc apply -f manifest/grafana
+```
+
 
 # Configuration of Device Gateway
 All Device Gateway settings are done through the web console. Here, as a simple test, we will add a setting to send Device Gateway status to MQTT broker in 1 second cycles.
@@ -137,7 +156,12 @@ All Device Gateway settings are done through the web console. Here, as a simple 
 
 ![IoT Interface Setting](./doc/IoT-Interface-Setting.png)
 
-Click the check mark in the upper right corner of the screen to update the settings, then press the "Sava" button in the menu at the top of the screen.
+
+| ------------- | ------------- |
+| Host(Host name:Port number)  | amq-broker-hdls-svc:61616  |
+| Client ID  | demo  |
+
+Click the green check mark in the upper right corner of the screen to update the settings, then press the "Save" button in the menu at the top of the screen.
 
 ## Event Settings
 
@@ -170,10 +194,10 @@ The format of the Message to be sent is, for example, as follows:
 Click the check mark in the upper right corner of the screen to update the settings, then press the "Sava" button in the menu at the top of the screen.
 
 ## Check the data sent to MQTT topic
-Install mosquitto's CLI in an environment that can connect to OpenShift, and execute the following command, and you can check the status of data sent to MQTT Topic.
+Install mosquitto's CLI in an environment that can connect to MicroShift, and execute the following command, and you can check the status of data sent to MQTT Topic.
 
 ```bash
-$ mosquitto_sub -h YOUR_DEVICE_IP -p 32000 -t test
+$ mosquitto_sub -h <YOUR_DEVICE_IP> -p 32000 -t test
 ```
 
 ```JSON
