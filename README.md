@@ -231,7 +231,7 @@ username: admin
 password: admin
 ```
 
-![loging to grafana](./doc/grafana-top.png)
+<img src="./doc/grafana-top.png" width="70%">
 
 ## Data source setting
 
@@ -241,11 +241,11 @@ Select [Connections]-[Data sources] from the side menu:
 
 Click `Add data source` to search for MQTT:
 
-![select mqtt data source](./doc/select-mqtt-datasource.png)
+<img src="./doc/select-mqtt-datasource.png" width="70%">
 
 Setting MQTT data source as follows:
 
-![setting mqtt data source](./doc/setting-mqtt-datasource.png)
+<img src="./doc/setting-mqtt-datasource.png" width="70%">
 
 ## Create a dashboard
 
