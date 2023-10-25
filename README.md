@@ -129,27 +129,37 @@ oc get po,svc -n dgw
 ```
 NAME                       READY   STATUS    RESTARTS   AGE
 pod/amq-broker-0           1/1     Running   0          33s
-pod/dgw-77c48c78b5-rphh5   1/1     Running   0          4m29s
 
 NAME                          TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)                          AGE
 service/amq-broker-hdls-svc   NodePort   10.43.58.243   <none>        8161:31160/TCP,61616:32000/TCP   33s
-service/dgw                   NodePort   10.43.20.141   <none>        80:31777/TCP,443:30000/TCP       4m29s
 ```
 
+## Deploy Grafana
 
-## Deloy Grafana
+Grafana is used to visualize data on RHAMQ. Please APPLY the following manifest.
 
 ```bash
 oc apply -f manifest/grafana
 ```
+
+Check Grafana status.
 
 ```bash
 oc get po,svc
 ```
 
 ```bash
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/grafana-7b9c866597-gvtvd   1/1     Running   0          25s
 
+NAME                          TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                          AGE
+service/grafana               NodePort   10.43.144.225   <none>        3000:30001/TCP                   25s
+```
 
+Open a browser and go to the following URL:
+
+```
+http://<YOUR_DEVICE_IP>:30001
 ```
 
 
@@ -167,7 +177,7 @@ All Device Gateway settings are done through the web console. Here, as a simple 
 
 
 | ------------- | ------------- |
-| Host(Host name:Port number)  | amq-broker-hdls-svc:61616  |
+| Host  | amq-broker-hdls-svc:61616  |
 | Client ID  | demo  |
 
 Click the green check mark in the upper right corner of the screen to update the settings, then press the "Save" button in the menu at the top of the screen.
@@ -192,15 +202,10 @@ Event settings are usually some action on a data source, such as a PLC. In this 
 The format of the Message to be sent is, for example, as follows:
 
 ```json
-{
-   "time":  <%=@nowUtc("yyyyMMdd HH:mm:ss.ms")%>,
-   "status": <%=@p("Managemnt.Information.Summary.ledStatus")%>,
-   "send": <%=@p("Managemnt.Lan.Summary.sendBytes0")%>,
-   "recieve": <%=@p("Managemnt.Lan.Summary.receiveBytes0")%>
-}
+{"send-packet": <%=@p("Managemnt.Lan.Summary.sendBytes0")%>,  "recieve-packet": <%=@p("Managemnt.Lan.Summary.receiveBytes0")%>}
 ```
 
-Click the check mark in the upper right corner of the screen to update the settings, then press the "Sava" button in the menu at the top of the screen.
+Click the green check mark in the upper right corner of the screen to update the settings, then press the "Save" button in the menu at the top of the screen.
 
 ## Check the data sent to MQTT topic
 Install mosquitto's CLI in an environment that can connect to MicroShift, and execute the following command, and you can check the status of data sent to MQTT Topic.
@@ -210,10 +215,55 @@ $ mosquitto_sub -h <YOUR_DEVICE_IP> -p 32000 -t test
 ```
 
 ```JSON
-{
-   "time":  20230718 01:59:37.606,
-   "status": Green Right (No Error),
-   "send": 2897082,
-   "recieve": 928442
-}
+{"send-packet": 6770149,  "recieve-packet": 787433}
+{"send-packet": 6770780,  "recieve-packet": 788061}
 ```
+
+
+# Configuration of Grafana
+
+## Login to Grafa dashboard
+
+Default account is as follows:
+
+```
+username: admin
+password: admin
+```
+
+![loging to grafana](./doc/grafana-top.png)
+
+## Data source setting
+
+Select [Connections]-[Data sources] from the side menu:
+
+![select data sources](./doc/select-datasources.png)
+
+Click `Add data source` to search for MQTT:
+
+![select mqtt data source](./doc/select-mqtt-datasource.png)
+
+Setting MQTT data source as follows:
+
+![setting mqtt data source](./doc/setting-mqtt-datasource.png)
+
+## Create a dashboard
+
+Select `Dashboards` from side menu:
+
+![select-dashboard-menu](./doc/select-dashboard.png)
+
+Click `import dashboard` to import `manifest/grafana/demo.json`
+
+![import dashboard](./doc/import-dashboard.png)
+
+
+Data on the MQTT Broker can be displayed as a graph as shown below. In this demo, the number of bytes sent/received by the Device Gateway is simply displayed as a graph. 
+
+![demo dashboard](./doc/demo-dashboard.gif)
+
+To pub the PLC data to the MQTT Broker, set up a connection with the PLC in the `Data source` setting of the Device Gateway and register the PLC register from which the data was acquired as a tag. 
+
+Then, in the `Event` setting, insert the tag as a macro and you can visualize the data in Grafana using the same procedure.
+
+![dgw data source](./doc/dgw-datasource.png)
