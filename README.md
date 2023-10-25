@@ -267,3 +267,7 @@ To pub the PLC data to the MQTT Broker, set up a connection with the PLC in the 
 Then, in the `Event` setting, insert the tag as a macro and you can visualize the data in Grafana using the same procedure.
 
 ![dgw data source](./doc/dgw-datasource.png)
+
+## Demonstration video of PLC data displayed in Grafana
+
+!['demo movie']('https://www.youtube.com/watch?v=N5UEwtG5lck')
