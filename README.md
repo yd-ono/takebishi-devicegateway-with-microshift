@@ -86,7 +86,7 @@ dgw    NodePort   10.43.20.141   <none>        80:31777/TCP,443:30000/TCP   78s
 44      - name: pvc-sdcard
 45        hostPath:
 46          path: /dgw/pvc-sdcard
-47          type: type: DirectoryOrCreate
+47          type: DirectoryOrCreate
 ```
 
 You can access Device Gateway's web console via Route:
