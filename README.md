@@ -42,7 +42,7 @@ cd takebishi-devicegateway-with-microshift/
 
 ```
 oc create -f manifest/namespace.yaml
-oc config set-context $(oc config current-context) --namespace=dgw
+sudo oc config set-context $(oc config current-context) --namespace=dgw
 ```
 
 ## Deploy Device Gateway
