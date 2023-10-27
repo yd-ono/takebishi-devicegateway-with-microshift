@@ -2,6 +2,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: dgw
+  namespace: dgw
   labels:
     app: dgw
 spec:

@@ -101,7 +101,7 @@ Alternatively, use NodePort to access the following URL:
 https://<YOUR_DEVICE_IP>:30000
 ```
 
-![Device Gateway Console](./images/console.png)  
+![Device Gateway Console](./images/console.png)
 
 Default account is as follows:
 
